@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
     <title>I miei animali Preferiti</title>
     <link rel="stylesheet" href="style.css">
@@ -16,10 +16,20 @@
         const { useState } = React;
         const ReactApp = () => {
 
-            const animals = [];
+            const [animals, setAnimals] = useState([]);
 
-            return (
-                <details> 
+            const addAnimal = () => {
+                const randomIndex = Math.floor(Math.random() * animalsChoices.length);
+                const randomAnimal = animalsChoices[randomIndex];
+
+                setAnimals(curr => [...curr, randomAnimal]);
+            }
+
+            const animalsChoices = ["Cane", "Gatto", "Pappagallo", "Cavallo", "Panda"];
+
+            return (<>
+                <button onClick={addAnimal}>Aggiungi animale</button>
+                <details>
                     <summary>
                         <h1> ANIMALI </h1>
                     </summary>
@@ -29,6 +39,7 @@
                         ))}
                     </ul>
                 </details>
+            </>
             )
         }
 
@@ -40,7 +51,7 @@
         const listaAnimali = document.querySelector(".lista-animali");
         const root = createRoot(listaAnimali);
 
-        root.render(<ReactApp/>)
+        root.render(<ReactApp />)
 
     </script>
 </head>
@@ -54,7 +65,7 @@
             <img src="https://picsum.photos/400/300" alt="Immagine Casuale">
         </figure>
         <div class="lista-animali">
-             
+
         </div>
     </main>
     <footer>
